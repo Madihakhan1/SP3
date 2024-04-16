@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+class Main{
+
+}
+
+class Streaming{
+
+}
+
+class User{
+
+}
+
+class Movie{
+
+}
+
+class StartMenu{
+
+}
+
+class FileIO{
+
+}
+
+class TextUI{
+
+}
+
+Main *-- Streaming
+Streaming *--StartMenu
+StartMenu *-- User
+StartMenu *--FileIO
+Streaming *-- FileIO
+StartMenu *-- TextUI
+Streaming *-- Movie
+
+@enduml
