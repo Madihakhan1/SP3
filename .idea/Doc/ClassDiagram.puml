@@ -11,6 +11,14 @@ class Streaming{
 
 class User{
 
+- String userName
+- String userPassword
+- List<media>watched
+- List<media>saved
+
+
+
+
 }
 
 class Movie{
