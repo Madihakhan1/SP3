@@ -7,7 +7,9 @@ object Streaming
 object User
 object Movie
 object FileIO
-object TextIO
+object TextUI
+object Data
+
 
 
 Main *-- Streaming
@@ -15,8 +17,9 @@ Streaming *--StartMenu
 StartMenu *-- User
 StartMenu *--FileIO
 Streaming *-- FileIO
-StartMenu *-- TextIO
+StartMenu *-- TextUI
 Streaming *-- Movie : has 100 movies
+Data *-- User
 
 
 
