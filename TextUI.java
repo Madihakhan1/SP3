@@ -6,6 +6,8 @@ public class TextUI {
 
    public String getInput(String msg){
 
+       System.out.println(msg);
+
        return msg;
 
 
@@ -13,7 +15,7 @@ public class TextUI {
 
     public void displayMessage(String msg){
 
-       this.displayMessage(msg);
+        System.out.println(msg);
     }
 
 
