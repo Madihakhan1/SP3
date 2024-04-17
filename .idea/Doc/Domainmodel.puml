@@ -20,7 +20,7 @@ Streaming *-- FileIO
 StartMenu *-- TextUI
 Streaming *-- Movie : has 100 movies
 Data *-- User
-
+Data *-- FileIO
 
 
 
