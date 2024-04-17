@@ -1,0 +1,120 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+class Main{
+
++ static void main(string [] args)
+
+
+}
+
+class Streaming{
+
+- List<Movie> allMovies
+- TextUI ui
+- FileIO io
++ void displayStartMenu ()
++ void displayMainMenu ()
+- void displaySavedList ()
+- void searchForMovie ()
+- void displayWatchedList ()
+- void logOut ()
+
+
+
+}
+
+class User{
+
+- String userName
+- String userPassword
+- List<movie>watched
+- List<movie>saved
+
++getUserName()
++getUserPassword()
++ void userWatched (Movie)
++ void userSaved (Movie)
++List<movie>watched()
++List<movie>saved()
++ String toString()
+
+
+
+
+}
+
+class Movie{
+
+- String title
+- int year
+- String genre
+- double rating
+
++ Movie(String title, int year, String genre, double rating)
++ void toString()
+
+
+}
+
+class StartMenu{
+
+
++ createUser()
++ login()
++ loadUser()
++ saveUser()
+}
+
+
+
+
+class FileIO{
+
++List<User> readUserData (String path)
++ void saveUserData (List<User> users)
++ void saveWatchedMovie (List<Movie> watched)
++ void saveSavedMovie(List<Movie> saved)
++ String[] readMovieData (String path, int length)
+
+
+
+}
+
+class TextUI{
+
+- Scanner scanner
++ String getInput(String msg)
++ void displayMessage(String msg)
+
+
+}
+
+
+Interface Data{
+
+void List<User> readUserData (String path)
+void saveUserData (List<User> users)
+void saveWatchedMovie (List<Movie> watched)
+void saveSavedMovie (List<Movie> saved)
+String[] readMovieData (String path, int length)
+
+
+}
+
+Main o-- Streaming
+
+Streaming o-- StartMenu
+Streaming o-- FileIO
+Streaming o-- Movie
+
+
+StartMenu o-- User
+StartMenu o--FileIO
+StartMenu o-- TextUI
+
+User o-- Data
+
+FileIO .. Data
+
+@enduml

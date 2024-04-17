@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object Main
+object StartMenu
+object Streaming
+object User
+object Movie
+object FileIO
+object TextUI
+object Data
+
+
+
+Main *-- Streaming
+Streaming *--StartMenu
+StartMenu *-- User
+StartMenu *--FileIO
+Streaming *-- FileIO
+StartMenu *-- TextUI
+Streaming *-- Movie : has 100 movies
+Data *-- User
+Data *-- FileIO
+
+
+
+
+@enduml
