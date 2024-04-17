@@ -7,7 +7,7 @@ private double rating;
 
 
 
-public Movie(String title, int year, String genre, double rating){
+public Movie(String title, int publicationYear, String genre, double rating){
 
     this.title = title;
     this.publicationYear = publicationYear;
