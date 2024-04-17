@@ -47,13 +47,18 @@ Interface Data{
 }
 
 Main o-- Streaming
+
 Streaming o-- StartMenu
+Streaming o-- FileIO
+Streaming o-- Movie
+
+
 StartMenu o-- User
 StartMenu o--FileIO
-Streaming o-- FileIO
 StartMenu o-- TextUI
-Streaming o-- Movie
+
 User o-- Data
+
 FileIO o-- Data
 
 @enduml
