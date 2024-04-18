@@ -11,14 +11,18 @@ class Main{
 class Streaming{
 
 - List<Movie> allMovies
+- ArrayList<String>listOfOptions
 - TextUI ui
 - FileIO io
-+ void displayStartMenu ()
+StartMenu startmenu = new StartMenu();
++ boolean loginOrRegister ()
 + void displayMainMenu ()
-- void displaySavedList ()
-- void searchForMovie ()
-- void displayWatchedList ()
-- void logOut ()
++ void displaySavedList ()
++ void searchForMovieByGenre ()
++ void displayWatchedList ()
++ void logOut ()
++ void setup()
++ void displayMovieList(List<Movie>in)
 
 
 
@@ -48,22 +52,32 @@ class Movie{
 
 - String title
 - int year
-- String genre
+- String[] genre
 - double rating
 
-+ Movie(String title, int year, String genre, double rating)
-+ void toString()
++ Movie(String title, int year, String[] genre, double rating)
+
++ String getTitle()
++ int getPublicationYear()
++ String[] getGenre()
++ double getRating()
+
++ String toString()
 
 
 }
 
 class StartMenu{
 
-
+- String userName;
+- String userPassword;
+- User currenUser;
+# List<User>users = new linkedList<>();
+- TextUI ui = new TextUI();
+- FileIO io = new FileIO();
 + createUser()
-+ login()
-+ loadUser()
-+ saveUser()
++ boolean login()
+
 }
 
 
@@ -71,14 +85,12 @@ class StartMenu{
 
 class FileIO{
 
-+List<User> readUserData (String path)
++ArrayList<User> readUserData (String path)
 + void saveUserData (List<User> users)
++ List<User>loadAllUserData()
 + void saveWatchedMovie (List<Movie> watched)
 + void saveSavedMovie(List<Movie> saved)
-+ String[] readMovieData (String path, int length)
-
-
-
++ List<Movie> readMovieData()
 }
 
 class TextUI{
@@ -93,11 +105,12 @@ class TextUI{
 
 Interface Data{
 
-void List<User> readUserData (String path)
+ArrayList<User> readUserData (String path)
 void saveUserData (List<User> users)
+List<User>loadAllUserData()
 void saveWatchedMovie (List<Movie> watched)
 void saveSavedMovie (List<Movie> saved)
-String[] readMovieData (String path, int length)
+List<Movie>readMovieData ()
 
 
 }
@@ -113,8 +126,7 @@ StartMenu o-- User
 StartMenu o--FileIO
 StartMenu o-- TextUI
 
-User o-- Data
 
-FileIO .. Data
+Data .. FileIO
 
 @enduml

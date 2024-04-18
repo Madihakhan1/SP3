@@ -110,6 +110,7 @@ public void logOut (){
 public void setup(){
     allMovies = io.readMovieData();
 
+
 }
 
 
