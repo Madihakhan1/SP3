@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class StartMenu {
 
@@ -19,6 +17,15 @@ public void createUser(){
     this.userName = ui.getInput("Please type a username:");
     this.userPassword = ui.getInput("Please type a password");
 
+    List<User>registeredUsers = io.loadAllUserData();
+
+    for(User u: registeredUsers){
+        if(u.getUserName().equals(this.userName)){
+            ui.displayMessage("User name is not available");
+            return;
+        }
+    }
+
     User createdUser = new User(userName, userPassword);
     this.users.add(createdUser);
     io.saveUserData(users);
@@ -27,22 +34,26 @@ public void createUser(){
 }
 
 
-public void login(){
+public boolean login(){
+    Scanner userinput = new Scanner(System.in);
+    ui.displayMessage("type your username");
+    userName = userinput.nextLine();
+    ui.displayMessage("type your password");
+    userPassword = userinput.nextLine();
 
-    ui.displayMessage("Please ");
 
+    List<User> registeredUsers = io.loadAllUserData();
+    for(User u : registeredUsers){
+        if(u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)){
+            currentUser = u;
+            System.out.println("current user: "+currentUser.getUserName());
+            return true;
 
+        }
+    }
 
-
+    return false;
 }
-public void loadUser(){
 
-
-}
-
-public void saveUser(){
-
-
-}
 
 }
