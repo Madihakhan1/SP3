@@ -7,8 +7,9 @@ public class TextUI {
    public String getInput(String msg){
 
        System.out.println(msg);
+       String res = scanner.nextLine();
 
-       return msg;
+       return res;
 
 
     }
