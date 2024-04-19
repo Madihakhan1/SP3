@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 //Læs filmen, opret bruger eller indlæs allerede oprettet bruger.
 public class Streaming {
@@ -65,7 +64,7 @@ public void displayMainMenu (){
 
     switch (options) {
         case "1":
-          displayMovieList(allMovies);
+          ui.displayMovieList(allMovies);
 
             break;
         case "2":
@@ -98,7 +97,10 @@ public void searchForMovieByGenre(){
            }
        }
    }
-   displayMovieList(moviesByGenre);
+   ui.displayMovieList(moviesByGenre);
+   int chosenMovie = ui.chooseMovie(moviesByGenre, "Please choose a movie. ");
+   ui.displayMessage("Du har valgt " + moviesByGenre.get(chosenMovie));
+
 
 }
 
@@ -115,12 +117,6 @@ public void setup(){
 
 }
 
-
-public void displayMovieList(List<Movie> in){
-    for(Movie m: in){
-        ui.displayMessage(m.toString());
-    }
-}
 
     public void startStreaming() {
         setup();
