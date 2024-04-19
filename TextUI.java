@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextUI {
@@ -19,6 +21,20 @@ public class TextUI {
         System.out.println(msg);
     }
 
+    public int chooseMovie(List<Movie> optionslist, String msg){
+        displayMessage(msg);
+        //displayList(optionslist, "");
+        String input = getInput("");//1
+        //  lav input om til en int
+        int choice = 0;
+        return choice;
+
+    }
 
 
+    public void displayMovieList(List<Movie> in){
+        for(Movie m: in){
+            displayMessage(in.indexOf(m) + ". " + m.toString());
+        }
+    }
 }
