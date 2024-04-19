@@ -30,6 +30,9 @@ while(running) {
         case "1":
             startMenu.createUser();
             running = false;
+            ui.displayMessage("\n Please login again");
+            startMenu.login();
+            displayMainMenu();
             break;
         case "2":
             boolean isLoggedIn = startMenu.login();
@@ -82,6 +85,7 @@ public void displayMainMenu (){
 
 public void displaySavedList (){
 
+
 }
 public void searchForMovieByGenre(){
     System.out.println(" ");
@@ -102,13 +106,11 @@ public void displayWatchedList (){
 
 }
 
-public void logOut (){
-
-}
 
 
 public void setup(){
     allMovies = io.readMovieData();
+
 
 
 }
@@ -119,6 +121,14 @@ public void displayMovieList(List<Movie> in){
         ui.displayMessage(m.toString());
     }
 }
+
+    public void startStreaming() {
+        setup();
+        boolean isLoggedIn = loginOrRegister();
+        if (isLoggedIn) {
+            displayMainMenu();
+        }
+    }
 
 
 }
