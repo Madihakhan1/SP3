@@ -9,6 +9,10 @@
   usecase "Media" as UC2
   usecase "PlayMedia" as UC4
   usecase "Logout" as UC6
+  usecase "Search" as UC7
+  usecase "ShowWatchedList" as UC8
+  usecase "ShowSavedList" as UC9
+
 
 user --> UC1
 UC1 --> UC3
@@ -20,5 +24,12 @@ UC4 --> UC2
 UC4 --> UC6
 UC1 --> UC6
 UC5 --> UC1
+UC1 --> UC7
+UC1 --> UC8
+UC1 --> UC9
+UC7 --> UC2
+UC8 --> UC2
+UC9 --> UC2
+
 
 @enduml

@@ -43,26 +43,21 @@ class User{
 +List<movie>saved()
 + String toString()
 
-
-
-
 }
 
-class Movie{
-
+abstract Media{
 - String title
-- int year
+- int publicationYear
 - String[] genre
 - double rating
 
-+ Movie(String title, int year, String[] genre, double rating)
+Media(String title, int year, String[] genre, double rating)
+void String getTitle()
+void int getPublicationYear()
+void String[] getGenre()
+void double getRating()
 
-+ String getTitle()
-+ int getPublicationYear()
-+ String[] getGenre()
-+ double getRating()
 
-+ String toString()
 
 
 }
@@ -115,18 +110,61 @@ List<Movie>readMovieData ()
 
 }
 
+class Movie {
+- String title
+- int year
+- String[] genre
+- double rating
+
++ Movie(String title, int year, String[] genre, double rating)
+
++ String getTitle()
++ int getPublicationYear()
++ String[] getGenre()
++ double getRating()
+
++ String toString()
+
+}
+
+class Serie{
+- String title
+- int yearsRunning
+- String[] genre
+- double rating
+- double season
+- double episode
+
++ Serie(String title, int yearsRunning, String[] genre, double rating, double season, double episode)
+
++ String getTitle()
++ int getYearsRunning()
++ String[] getGenre()
++ double getRating()
++ double getSeasons()
++ double getEpisodes()
++ String toString()
+
+}
+
 Main o-- Streaming
 
 Streaming o-- StartMenu
 Streaming o-- FileIO
-Streaming o-- Movie
+Streaming o-- Media
 
+Media .. Movie
+Media .. Serie
 
 StartMenu o-- User
 StartMenu o--FileIO
 StartMenu o-- TextUI
 
-
 Data .. FileIO
 
 @enduml
+
+extends <|-- (is-a)
+composition *-- (must-have)
+Aggregation o-- (can-have)
+Associering <--

@@ -15,22 +15,22 @@ StartMenu o-- User
 StartMenu *-- Media
 
 
-Media o-- Serie:has 100 series
-Media o-- Movie:has 100 movies
-Media *-- Search
+Media <|-- Serie:has 100 series
+Media <|-- Movie:has 100 movies
+StartMenu *-- Search
 
+Search o-- Media
 
-Movie o-- WatchedList
-Movie o-- SavedList
+User o-- WatchedList
+User o-- SavedList
 
-Serie o-- WatchedList
-Serie o-- SavedList
-
-
+WatchedList o-- Media
+SavedList o-- Media
 
 
 
 @enduml
+
 extends <|-- (is-a)
 composition *-- (must-have)
 Aggregation o-- (can-have)
