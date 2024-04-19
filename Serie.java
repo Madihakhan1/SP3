@@ -1,23 +1,26 @@
-public class Movie extends Media {
+public class Serie extends Media{
+
 
     private String title;
-    private int publicationYear;
+    private int yearsRunning;
     private String[] genre;
     private double rating;
+    private double season;
+    private double episode;
 
 
-    public Movie(String title, int publicationYear, String[] genre, double rating) {
+    public Serie(String title, int publicationYear, String[] genre, double rating) {
         super(title, publicationYear, genre, rating);
-
     }
+
 
     public String getTitle() {
 
         return title;
     }
 
-    public int getPublicationYear() {
-        return publicationYear;
+    public int getYearsRunning() {
+        return yearsRunning;
     }
 
     public String[] getGenre() {
@@ -29,6 +32,13 @@ public class Movie extends Media {
         return rating;
     }
 
+    public double getSeason(){
+        return season;
+    }
+
+    public double getEpisode(){
+        return episode;
+    }
     @Override
     public String toString() {
         String genres = "";
@@ -37,10 +47,9 @@ public class Movie extends Media {
             genres += s;
         }
         StringBuilder out = new StringBuilder();
-        out.append(this.title).append(", ").append(this.publicationYear).append(", "+genres).append(", ").append(rating);
+        out.append(this.title).append(", ").append(this.yearsRunning).append(", "+genres).append(", ").append(rating).append(", " + season).append(", " + episode);
 
         return out.toString();
     }
-
 
 }

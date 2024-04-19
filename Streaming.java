@@ -100,6 +100,7 @@ public void searchForMovieByGenre(){
    ui.displayMovieList(moviesByGenre);
    int chosenMovie = ui.chooseMovie(moviesByGenre, "Please choose a movie. ");
    ui.displayMessage("Du har valgt " + moviesByGenre.get(chosenMovie));
+   // moviesByGenre.get(chosenMovie).play();
 
 
 }

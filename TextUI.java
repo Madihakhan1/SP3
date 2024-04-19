@@ -26,7 +26,7 @@ public class TextUI {
         //displayList(optionslist, "");
         String input = getInput("");//1
         //  lav input om til en int
-        int choice = 0;
+        int choice = Integer.parseInt(input);
         return choice;
 
     }
