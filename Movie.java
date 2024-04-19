@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+
 public class Movie extends Media {
 
     private String title;
@@ -9,7 +12,14 @@ public class Movie extends Media {
     public Movie(String title, int publicationYear, String[] genre, double rating) {
         super(title, publicationYear, genre, rating);
 
+        this.title = title;
+        this.publicationYear = publicationYear;
+        this.genre = genre;
+        this.rating = rating;
+
+
     }
+
 
     public String getTitle() {
 
@@ -32,10 +42,14 @@ public class Movie extends Media {
     @Override
     public String toString() {
         String genres = "";
-        for(String s : this.genre){
+
+        if (genre != null && genre.length > 0) {
+            genres = String.join(", ", genre);
+        }
+      /*  for(String s : this.genre){
             genres += ", ";
             genres += s;
-        }
+        }*/
         StringBuilder out = new StringBuilder();
         out.append(this.title).append(", ").append(this.publicationYear).append(", "+genres).append(", ").append(rating);
 
