@@ -6,13 +6,14 @@ import java.util.List;
 public class Streaming {
 
     private List<Movie> allMovies = new ArrayList<>();
-    private ArrayList<String> listOfOptions;
 
 
     private TextUI ui = new TextUI();
     private FileIO io = new FileIO();
 
     StartMenu startMenu = new StartMenu();
+
+    public static User currentUser;
 
 
 public boolean loginOrRegister(){
@@ -43,13 +44,12 @@ while(running) {
             }
 
 
-        case "3":
-            running = false;
-            ui.displayMessage("\nPlease login again");
-            startMenu.login();
-            displayMainMenu();
-            displayWatchedList();
-            break;
+                case "3":
+                    running = false;
+                    ui.displayMessage("\nPlease login again");
+                    startMenu.login();
+                    displayMainMenu();
+                    break;
 
 
         default:
@@ -109,17 +109,30 @@ public void searchForMovieByGenre(){
 
 }
 
-public void displayWatchedList (){
-
-    for(Movie m : allMovies){
-
-        System.out.println(m);
-
+    public void displayWatchedList() {
+        List<Media> watchedList = Streaming.currentUser.getWatched(); // Assuming this returns a list of watched media
+        ui.displayMessage("Chosen media you've already watched or want to continue watching: ");
+        for (Media media : watchedList) {
+            ui.displayMessage(media.toString()); // Assuming media.toString() provides appropriate information
+        }
     }
 
 
 
-}
+
+
+    public void displaySavedList(){
+
+
+        List<Media> savedList  = Streaming.currentUser.getSaved(); // Assuming this returns a list of watched media
+        ui.displayMessage("You have saved this movie ");
+        for (Media media : savedList) {
+            ui.displayMessage(media.toString()); // Assuming media.toString() provides appropriate information
+        }
+
+
+    }
+
 
 
 public void setup(){

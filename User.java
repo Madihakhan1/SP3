@@ -9,8 +9,8 @@ public class User {
 
     private String userName;
     private String password;
-    private List<Movie> watched;
-    private List<Movie> saved;
+    private List<Media> watched;
+    private List<Media> saved;
 
 
     public User(String userName, String password) {
@@ -30,21 +30,27 @@ public class User {
     }
 
     public void userWatched(Movie m) {
-        watched().add(m);
+        getWatched().add(m);
     }
 
     public void userSaved(Movie m) {
-        saved().add(m);
+        getSaved().add(m);
     }
 
-    public List<Movie> watched() {
+    public List<Media> getWatched() {
         return watched;
     }
+    public void watched(Media movie) {
+        watched.add(movie);
+    }
 
-    public List<Movie> saved() {
+    public List<Media> getSaved() {
         return saved;
     }
 
+    public  void addToSaveList(Media movie){
+        saved.add(movie);
+    }
 
     //Skal tjekke hvad vi skal skrive i vores toString.
     @Override

@@ -38,7 +38,7 @@ public void createUser(){
 }
 
 
-public boolean login(){
+public User login(){
     Scanner userinput = new Scanner(System.in);
     ui.displayMessage("type your username");
     userName = userinput.nextLine();
@@ -51,12 +51,12 @@ public boolean login(){
         if(u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)){
             currentUser = u;
             System.out.println("current user: "+currentUser.getUserName());
-            return true;
+            return currentUser;
 
         }
     }
 
-    return false;
+    return null;
 }
 
 
