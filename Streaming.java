@@ -16,32 +16,32 @@ public class Streaming {
     public static User currentUser;
 
 
-public boolean loginOrRegister(){
-ui.displayMessage("Welcome to ChillFlex, do you want to create a user or login?");
+    public boolean loginOrRegister(){
+        ui.displayMessage("Welcome to ChillFlex, do you want to create a user or login?");
 
-String options = "";
-boolean running = true;
+        String options = "";
+        boolean running = true;
 //while (choosing){
 
-    options = ui.getInput("Choose an option: \n Option 1: create a user \n option 2: login \n option 3: Exit");
+        options = ui.getInput("Choose an option: \n Option 1: create a user \n option 2: login \n option 3: Exit");
 
-while(running) {
-    switch (options) {
-        case "1":
-            startMenu.createUser();
-            running = false;
-            ui.displayMessage("\n Please login again");
-            startMenu.login();
-            displayMainMenu();
-            break;
-        case "2":
-            boolean isLoggedIn = startMenu.login();
-            if(isLoggedIn){
-                running = false;
-                return true;
-            }else {
-                return false;
-            }
+        while(running) {
+            switch (options) {
+                case "1":
+                    startMenu.createUser();
+                    running = false;
+                    ui.displayMessage("\n Please login again");
+                    startMenu.login();
+                    displayMainMenu();
+                    break;
+                case "2":
+                    currentUser = startMenu.login();
+                    if(currentUser!=null){
+                        running = false;
+                        return true;
+                    }else {
+                        return false;
+                    }
 
 
                 case "3":
@@ -52,62 +52,91 @@ while(running) {
                     break;
 
 
-        default:
-           running = false;
+                default:
+                    running = false;
+            }
+
+        }
+
+        return false;
     }
 
-}
+    public void displayMainMenu (){
 
-return false;
-}
-
-public void displayMainMenu (){
-
-  String options =   ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: Search after genre \n option 3: display saved list \n option 4: see watched list");
+        String options =   ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: Search after genre \n option 3: display saved list \n option 4: see watched list");
 
 
-    switch (options) {
-        case "1":
-          ui.displayMovieList(allMovies);
+        switch (options) {
+            case "1":
+                ui.displayMovieList(allMovies);
 
-            break;
-        case "2":
-            searchForMovieByGenre();
-            break;
+                break;
+            case "2":
+                searchForMovieByGenre();
+                break;
 
-        case "3":
-            break;
+            case "3":
+                break;
+
+            case"4":
+                displayWatchedList();
+                break;
 
 
-        default:
+            default:
+        }
+
+
+
     }
 
+    public void searchForMovieByGenre(){
+        System.out.println(" ");
+        String input = ui.getInput("Write the genre you are looking for");
+        List<Movie> moviesByGenre = new LinkedList<>();
+        for(Movie m: allMovies){
+            for(String s : m.getGenre()){
+                if(s.equalsIgnoreCase(input)){
+                    moviesByGenre.add(m);
+                }
+            }
+        }
+        ui.displayMovieList(moviesByGenre);
+        int chosenIndexMovie = ui.chooseMovie(moviesByGenre, "Please choose a movie. ");
+        if (chosenIndexMovie >= 0 && chosenIndexMovie < moviesByGenre.size()) {
+            Movie chosenMovie = moviesByGenre.get(chosenIndexMovie);
+            ui.displayMessage("You have chosen " + chosenMovie.getTitle());
+            ui.displayMessage("Do you want to play the movie or add it to your saved list? ");
+            String choice = ui.getInput("1. Play, 2. Save to list");
+            switch (choice) {
+                case "1":
+                    play(chosenMovie); // Pass the chosen movie to the play() method
+                    break;
+
+                case "2":
+                    //save to savedlist
+                    currentUser.addToSaveList(chosenMovie);
+                    break;
+            }
+            //play(chosenMovie); // Pass the chosen movie to the play() method
+        } else {
+            ui.displayMessage("Invalid selection.");
+        }
 
 
-}
-
-public void displaySavedList (){
-
-
-}
-public void searchForMovieByGenre(){
-    System.out.println(" ");
-   String input = ui.getInput("Write the genre you are looking for");
-   List<Movie> moviesByGenre = new LinkedList<>();
-   for(Movie m: allMovies){
-       for(String s : m.getGenre()){
-           if(s.equalsIgnoreCase(input)){
-               moviesByGenre.add(m);
-           }
-       }
-   }
-   ui.displayMovieList(moviesByGenre);
-   int chosenMovie = ui.chooseMovie(moviesByGenre, "Please choose a movie. ");
-   ui.displayMessage("Du har valgt " + moviesByGenre.get(chosenMovie));
-   // moviesByGenre.get(chosenMovie).play();
+    }
+    public void play(Movie chosenMovie) {
+        if (chosenMovie != null) {
+            ui.displayMessage("Now playing: " + chosenMovie.getTitle());
+            currentUser.watched(chosenMovie);
+            // Implement logic to play the chosen movie
+        } else {
+            ui.displayMessage("Invalid selection. Please try again.");
+        }
 
 
-}
+    }
+
 
     public void displayWatchedList() {
         List<Media> watchedList = Streaming.currentUser.getWatched(); // Assuming this returns a list of watched media
@@ -135,12 +164,12 @@ public void searchForMovieByGenre(){
 
 
 
-public void setup(){
-    allMovies = io.readMovieData();
+    public void setup(){
+        allMovies = io.readMovieData();
 
 
 
-}
+    }
 
 
     public void startStreaming() {
@@ -150,7 +179,6 @@ public void setup(){
             displayMainMenu();
         }
     }
-
 
 }
 
