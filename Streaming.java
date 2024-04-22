@@ -110,6 +110,14 @@ public void searchForMovieByGenre(){
 
 public void displayWatchedList (){
 
+    for(Movie m : allMovies){
+
+        System.out.println(m);
+
+    }
+
+
+
 }
 
 
