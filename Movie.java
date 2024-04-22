@@ -16,13 +16,10 @@ public class Movie extends Media {
         this.publicationYear = publicationYear;
         this.genre = genre;
         this.rating = rating;
-
-
     }
 
 
     public String getTitle() {
-
         return title;
     }
 
@@ -35,7 +32,6 @@ public class Movie extends Media {
     }
 
     public double getRating() {
-
         return rating;
     }
 
@@ -55,6 +51,4 @@ public class Movie extends Media {
 
         return out.toString();
     }
-
-
 }

@@ -33,8 +33,6 @@ public void createUser(){
     User createdUser = new User(userName, userPassword);
     this.registeredUsers.add(createdUser);
     io.saveUserData(this.registeredUsers);
-
-
 }
 
 
@@ -46,7 +44,6 @@ public User login(){
     userPassword = userinput.nextLine();
 
 
-
     for(User u : registeredUsers){
         if(u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)){
             currentUser = u;
@@ -55,9 +52,6 @@ public User login(){
 
         }
     }
-
     return null;
-}
-
-
+    }
 }

@@ -51,13 +51,10 @@ public class Streaming {
                     displayMainMenu();
                     break;
 
-
                 default:
                     running = false;
             }
-
         }
-
         return false;
     }
 
@@ -76,18 +73,15 @@ public class Streaming {
                 break;
 
             case "3":
+                displaySavedList();
                 break;
 
             case"4":
                 displayWatchedList();
                 break;
 
-
             default:
         }
-
-
-
     }
 
     public void searchForMovieByGenre(){
@@ -101,6 +95,7 @@ public class Streaming {
                 }
             }
         }
+
         ui.displayMovieList(moviesByGenre);
         int chosenIndexMovie = ui.chooseMovie(moviesByGenre, "Please choose a movie. ");
         if (chosenIndexMovie >= 0 && chosenIndexMovie < moviesByGenre.size()) {
@@ -122,9 +117,8 @@ public class Streaming {
         } else {
             ui.displayMessage("Invalid selection.");
         }
-
-
     }
+
     public void play(Movie chosenMovie) {
         if (chosenMovie != null) {
             ui.displayMessage("Now playing: " + chosenMovie.getTitle());
@@ -133,8 +127,6 @@ public class Streaming {
         } else {
             ui.displayMessage("Invalid selection. Please try again.");
         }
-
-
     }
 
 
@@ -147,28 +139,17 @@ public class Streaming {
     }
 
 
-
-
-
     public void displaySavedList(){
-
-
         List<Media> savedList  = Streaming.currentUser.getSaved(); // Assuming this returns a list of watched media
         ui.displayMessage("You have saved this movie ");
         for (Media media : savedList) {
             ui.displayMessage(media.toString()); // Assuming media.toString() provides appropriate information
         }
-
-
     }
-
 
 
     public void setup(){
         allMovies = io.readMovieData();
-
-
-
     }
 
 
@@ -179,7 +160,6 @@ public class Streaming {
             displayMainMenu();
         }
     }
-
 }
 
 
