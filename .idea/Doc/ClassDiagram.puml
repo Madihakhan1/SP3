@@ -98,17 +98,6 @@ class TextUI{
 }
 
 
-Interface Data{
-
-ArrayList<User> readUserData (String path)
-void saveUserData (List<User> users)
-List<User>loadAllUserData()
-void saveWatchedMovie (List<Movie> watched)
-void saveSavedMovie (List<Movie> saved)
-List<Movie>readMovieData ()
-
-
-}
 
 class Movie {
 - String title
@@ -159,8 +148,6 @@ Media .. Serie
 StartMenu o-- User
 StartMenu o--FileIO
 StartMenu o-- TextUI
-
-Data .. FileIO
 
 @enduml
 
