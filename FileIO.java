@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class FileIO implements Data{
+public class FileIO {
 
 
     public ArrayList<User> readUserData (String path){
@@ -41,7 +41,7 @@ public void saveUserData (List<User> users){
     //Vi gemmer splittet i et array, 0 pladsen er brugernavnet, 1 pladsen er adgangskoden også bruger vi trim til at fjerne mellemrum i mellem username og password.
     //Også bruger vi de split til at lave bruger objekter og tilføjer det til listen loadedUsers.
 
-    @Override
+
     public List<User> loadAllUserData() {
         List<User> loadedUsers = new LinkedList<>();
         try{
