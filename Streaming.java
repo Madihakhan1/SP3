@@ -48,6 +48,7 @@ while(running) {
             ui.displayMessage("\nPlease login again");
             startMenu.login();
             displayMainMenu();
+            displayWatchedList();
             break;
 
 
@@ -119,7 +120,6 @@ public void displayWatchedList (){
 
 
 }
-
 
 
 public void setup(){

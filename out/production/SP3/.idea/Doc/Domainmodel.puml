@@ -1,28 +1,37 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-object Main
 object StartMenu
-object Streaming
 object User
 object Movie
-object FileIO
-object TextUI
-object Data
+object Serie
+object Media
+object WatchedList
+object SavedList
+object Search
 
 
+StartMenu o-- User
+StartMenu *-- Media
 
-Main *-- Streaming
-Streaming *--StartMenu
-StartMenu *-- User
-StartMenu *--FileIO
-Streaming *-- FileIO
-StartMenu *-- TextUI
-Streaming *-- Movie : has 100 movies
-Data *-- User
-Data *-- FileIO
 
+Media <|-- Serie:has 100 series
+Media <|-- Movie:has 100 movies
+StartMenu *-- Search
+
+Search o-- Media
+
+User o-- WatchedList
+User o-- SavedList
+
+WatchedList o-- Media
+SavedList o-- Media
 
 
 
 @enduml
+
+extends <|-- (is-a)
+composition *-- (must-have)
+Aggregation o-- (can-have)
+Associering <--
