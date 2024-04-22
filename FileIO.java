@@ -80,6 +80,8 @@ public void saveUserData (List<User> users){
 }
 
 public void saveSavedMovie(List<Movie> saved){
+
+
 try{
     FileWriter writer = new FileWriter(".idea/Doc/saved");
 
@@ -91,6 +93,8 @@ try{
 }catch (IOException e){
     System.out.println("File was not found");
     }
+
+
 }
 
 
