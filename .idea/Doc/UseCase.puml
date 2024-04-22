@@ -4,9 +4,9 @@
   actor user
 
   usecase "createUser" as UC3
-  usecase "StarMenu" as UC1
+  usecase "StartMenu" as UC1
   usecase "Login" as UC5
-  usecase "Media" as UC2
+  usecase "DisplayAllMedia" as UC2
   usecase "PlayMedia" as UC4
   usecase "Logout" as UC6
   usecase "Search" as UC7
