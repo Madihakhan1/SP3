@@ -45,6 +45,9 @@ while(running) {
 
         case "3":
             running = false;
+            ui.displayMessage("\nPlease login again");
+            startMenu.login();
+            displayMainMenu();
             break;
 
 
