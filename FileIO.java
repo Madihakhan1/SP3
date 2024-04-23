@@ -1,5 +1,3 @@
-//Vi skal ha en file reader og en scanner.
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -80,7 +78,6 @@ public void saveUserData (List<User> users){
 
 public void savedMedia(List<Media> saved){
 
-
 try{
     FileWriter writer = new FileWriter(".idea/Doc/saved");
 
@@ -94,8 +91,6 @@ try{
 }catch (IOException e){
     System.out.println("File was not found");
     }
-
-
 }
 
 
@@ -118,5 +113,4 @@ try{
         }
         return  movies;
     }
-
 }

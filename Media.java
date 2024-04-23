@@ -16,7 +16,6 @@ public abstract class Media {
     }
 
     public String getTitle() {
-
         return title;
     }
 
@@ -29,7 +28,6 @@ public abstract class Media {
     }
 
     public double getRating() {
-
         return rating;
     }
 
