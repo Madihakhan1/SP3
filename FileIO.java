@@ -81,12 +81,18 @@ public void savedMedia(List<Media> saved){
 try{
     FileWriter writer = new FileWriter(".idea/Doc/saved");
 
-    for(Media m: saved){
-        // pil genrer ud og kør igennem med for-loop og lav string ud af dem (fx crime, romance, drama)
-        String textToSave = (m.getTitle() + ";" + m.getPublicationYear() + m.getGenre() + m.getRating() + "\n");
-        writer.write(textToSave);
+    for(Media m: saved) {
+        String genres = "";
+        String[] genre = m.getGenre();
+        for(int i = 0; i < genre.length; i++) {
+        genres += genre[i] + ",";
+        }
+            // pil genrer ud og kør igennem med for-loop og lav string ud af dem (fx crime, romance, drama)
+            String textToSave = (m.getTitle() + "; " + m.getPublicationYear() + "; " + genres +  "; " + m.getRating() + "\n");
+            writer.write(textToSave);
 
-    }
+        }
+
     writer.close();
 }catch (IOException e){
     System.out.println("File was not found");

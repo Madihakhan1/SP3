@@ -125,7 +125,6 @@ public class Streaming {
         if (chosenMovie != null) {
             ui.displayMessage("Now playing: " + chosenMovie.getTitle());
             currentUser.watched(chosenMovie);
-            // Implement logic to play the chosen movie
         } else {
             ui.displayMessage("Invalid selection. Please try again.");
         }
@@ -149,10 +148,10 @@ public class Streaming {
     public void displaySavedList(){
 
 
-        List<Media> savedList  = Streaming.currentUser.getSaved(); // Assuming this returns a list of watched media
+        List<Media> savedList  = Streaming.currentUser.getSaved();
         ui.displayMessage("You have saved this movie ");
         for (Media media : savedList) {
-            ui.displayMessage(media.toString()); // Assuming media.toString() provides appropriate information
+            ui.displayMessage(media.toString());
         }
 
 
