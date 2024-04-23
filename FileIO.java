@@ -1,7 +1,6 @@
 //Vi skal ha en file reader og en scanner.
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -79,15 +78,17 @@ public void saveUserData (List<User> users){
     }
 }
 
-public void saveSavedMovie(List<Movie> saved){
+public void savedMedia(List<Media> saved){
 
 
 try{
     FileWriter writer = new FileWriter(".idea/Doc/saved");
 
-    for(Movie m: saved){
-        String textToSave = (m.getTitle() + m.getPublicationYear() + m.getGenre() + m.getRating() + "\n");
+    for(Media m: saved){
+        // pil genrer ud og kør igennem med for-loop og lav string ud af dem (fx crime, romance, drama)
+        String textToSave = (m.getTitle() + ";" + m.getPublicationYear() + m.getGenre() + m.getRating() + "\n");
         writer.write(textToSave);
+
     }
     writer.close();
 }catch (IOException e){

@@ -29,19 +29,19 @@ public class User {
         return password;
     }
 
-    public void userWatched(Movie m) {
+    public void userWatched(Media m) {
         getWatched().add(m);
     }
 
-    public void userSaved(Movie m) {
+    public void userSaved(Media m) {
         getSaved().add(m);
     }
 
     public List<Media> getWatched() {
         return watched;
     }
-    public void watched(Media movie) {
-        watched.add(movie);
+    public void watched(Media media) {
+        watched.add(media);
     }
 
     public List<Media> getSaved() {

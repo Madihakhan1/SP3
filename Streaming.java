@@ -29,7 +29,7 @@ public class Streaming {
             switch (options) {
                 case "1":
                     startMenu.createUser();
-                    running = false;
+
                     ui.displayMessage("\n Please login again");
                     startMenu.login();
                     displayMainMenu();
@@ -51,9 +51,6 @@ public class Streaming {
                     displayMainMenu();
                     break;
 
-
-                default:
-                    running = false;
             }
 
         }
@@ -76,14 +73,12 @@ public class Streaming {
                 break;
 
             case "3":
+                displaySavedList();
                 break;
 
             case"4":
                 displayWatchedList();
                 break;
-
-
-            default:
         }
 
 
@@ -116,6 +111,7 @@ public class Streaming {
                 case "2":
                     //save to savedlist
                     currentUser.addToSaveList(chosenMovie);
+                    io.savedMedia(currentUser.getSaved());
                     break;
             }
             //play(chosenMovie); // Pass the chosen movie to the play() method
