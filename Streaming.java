@@ -6,19 +6,17 @@ import java.util.List;
 public class Streaming {
 
     private List<Movie> allMovies = new ArrayList<>();
-
+    private List<Serie> allSeries = new ArrayList<>();
 
     private TextUI ui = new TextUI();
     private FileIO io = new FileIO();
 
     StartMenu startMenu = new StartMenu();
-
     public static User currentUser;
 
 
     public boolean loginOrRegister(){
         ui.displayMessage("Welcome to ChillFlex, do you want to create a user or login?");
-
         String options = "";
         boolean running = true;
 //while (choosing){
@@ -29,7 +27,6 @@ public class Streaming {
             switch (options) {
                 case "1":
                     startMenu.createUser();
-
                     ui.displayMessage("\n Please login again");
                     startMenu.login();
                     displayMainMenu();
@@ -50,39 +47,38 @@ public class Streaming {
                     startMenu.login();
                     displayMainMenu();
                     break;
-
             }
-
         }
-
         return false;
     }
 
     public void displayMainMenu (){
-
-        String options =   ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: Search after genre \n option 3: display saved list \n option 4: see watched list");
-
+        String options =   ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: see watched list");
 
         switch (options) {
             case "1":
                 ui.displayMovieList(allMovies);
-
                 break;
             case "2":
+                ui.displaySerieList(allSeries);
+                break;
+
+            case  "3":
+                searchForMovieByTitle();
+
+            case "4":
                 searchForMovieByGenre();
                 break;
 
-            case "3":
+            case"5":
                 displaySavedList();
                 break;
 
-            case"4":
+            case"6":
                 displayWatchedList();
                 break;
+
         }
-
-
-
     }
 
     public void searchForMovieByGenre(){
@@ -106,6 +102,7 @@ public class Streaming {
             switch (choice) {
                 case "1":
                     play(chosenMovie); // Pass the chosen movie to the play() method
+                    //io.saveWatchedMedia(currentUser.getWatched());
                     break;
 
                 case "2":
@@ -118,9 +115,44 @@ public class Streaming {
         } else {
             ui.displayMessage("Invalid selection.");
         }
-
-
     }
+
+    public void searchForMovieByTitle(){
+        System.out.println(" ");
+        String input = ui.getInput("Write the title you are looking for");
+        List<Movie> moviesByTitle = new LinkedList<>();
+        for(Movie mTitle: allMovies){
+            String s = mTitle.getTitle();
+            if(s.equalsIgnoreCase(input)){
+                moviesByTitle.add(mTitle);
+            }
+        }
+
+       ui.displayMovieList(moviesByTitle);
+       int chosenIndexMovie = ui.chooseMovie(moviesByTitle, "Please choose a movie. ");
+       if (chosenIndexMovie >= 0 && chosenIndexMovie < moviesByTitle.size()) {
+            Movie chosenMovie = moviesByTitle.get(chosenIndexMovie);
+            ui.displayMessage("You have chosen " + chosenMovie.getTitle());
+            ui.displayMessage("Do you want to play the movie or add it to your saved list? ");
+            String choice = ui.getInput("1. Play, 2. Save to list");
+            switch (choice) {
+                case "1":
+                    play(chosenMovie); // Pass the chosen movie to the play() method
+                    //io.saveWatchedMedia(currentUser.getWatched());
+                    break;
+
+                case "2":
+                    //save to savedlist
+                    currentUser.addToSaveList(chosenMovie);
+                    io.savedMedia(currentUser.getSaved());
+                    break;
+            }
+            //play(chosenMovie); // Pass the chosen movie to the play() method
+        } else {
+            ui.displayMessage("Invalid selection.");
+        }
+    }
+
     public void play(Movie chosenMovie) {
         if (chosenMovie != null) {
             ui.displayMessage("Now playing: " + chosenMovie.getTitle());
@@ -128,10 +160,7 @@ public class Streaming {
         } else {
             ui.displayMessage("Invalid selection. Please try again.");
         }
-
-
     }
-
 
     public void displayWatchedList() {
         List<Media> watchedList = Streaming.currentUser.getWatched(); // Assuming this returns a list of watched media
@@ -141,31 +170,18 @@ public class Streaming {
         }
     }
 
-
-
-
-
     public void displaySavedList(){
-
-
         List<Media> savedList  = Streaming.currentUser.getSaved();
-        ui.displayMessage("You have saved this movie ");
+        ui.displayMessage("Your saved list ");
         for (Media media : savedList) {
             ui.displayMessage(media.toString());
         }
-
-
     }
-
-
 
     public void setup(){
         allMovies = io.readMovieData();
-
-
-
+        allSeries = io.readSerieData();
     }
-
 
     public void startStreaming() {
         setup();
@@ -174,7 +190,6 @@ public class Streaming {
             displayMainMenu();
         }
     }
-
 }
 
 

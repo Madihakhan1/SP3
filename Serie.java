@@ -1,44 +1,24 @@
 public class Serie extends Media{
 
-
-    private String title;
-    private int yearsRunning;
-    private String[] genre;
-    private double rating;
-    private double season;
-    private double episode;
+    private String yearsRunning;
+    private String[] seasonsAndEpisodes;
 
 
-    public Serie(String title, int publicationYear, String[] genre, double rating) {
-        super(title, publicationYear, genre, rating);
+    public Serie(String title, String yearsRunning, String[] genre, double rating, String[] seasonsAndEpisodes) {
+        super(title, genre, rating);
+        this.yearsRunning = yearsRunning;
+        this.seasonsAndEpisodes = seasonsAndEpisodes;
     }
 
-
-    public String getTitle() {
-
-        return title;
-    }
-
-    public int getYearsRunning() {
+    public String getYearsRunning() {
         return yearsRunning;
     }
 
-    public String[] getGenre() {
-        return genre;
+    public String[] getSeasonsAndEpisodes(){
+        return seasonsAndEpisodes;
     }
 
-    public double getRating() {
 
-        return rating;
-    }
-
-    public double getSeason(){
-        return season;
-    }
-
-    public double getEpisode(){
-        return episode;
-    }
     @Override
     public String toString() {
         String genres = "";
@@ -47,7 +27,7 @@ public class Serie extends Media{
             genres += s;
         }
         StringBuilder out = new StringBuilder();
-        out.append(this.title).append(", ").append(this.yearsRunning).append(", "+genres).append(", ").append(rating).append(", " + season).append(", " + episode);
+        out.append(this.title).append(", ").append(this.yearsRunning).append(", "+genres).append(", ").append(rating).append(", " + seasonsAndEpisodes);
 
         return out.toString();
     }

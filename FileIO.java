@@ -27,7 +27,6 @@ public void saveUserData (List<User> users){
     }catch (IOException e){
         System.out.println("File was not found");
     }
-
 }
 
 //Vi starter med at lave en liste med bruger --> linkedlist: Den sørger for at alle brugere kommer i den rækkefølge vi har oprettet den i.
@@ -56,10 +55,8 @@ public void saveUserData (List<User> users){
         }catch (Exception e){
             System.out.println("File was not found: "+e.getMessage());
         }
-
         return loadedUsers;
     }
-
 
     public void saveWatchedMedia (List<Media> watched){
 
@@ -67,7 +64,12 @@ public void saveUserData (List<User> users){
         FileWriter writer = new FileWriter(".idea/Doc/Watched");
 
         for (Media m: watched) {
-            String textToSave = (m.getTitle() + m.getPublicationYear() + m.getGenre() + m.getRating() + "\n");
+            String genres = "";
+            String[] genre = m.getGenre();
+            for(int i = 0; i < genre.length; i++) {
+                genres += genre[i] + ",";
+            }
+            String textToSave = (m.getTitle() + "; " + "; " + genres +  "; " + m.getRating() + "\n");
             writer.write(textToSave);
         }
         writer.close();
@@ -88,9 +90,8 @@ try{
         genres += genre[i] + ",";
         }
             // pil genrer ud og kør igennem med for-loop og lav string ud af dem (fx crime, romance, drama)
-            String textToSave = (m.getTitle() + "; " + m.getPublicationYear() + "; " + genres +  "; " + m.getRating() + "\n");
+            String textToSave = (m.getTitle() + "; " + "; " + genres +  "; " + m.getRating() + "\n");
             writer.write(textToSave);
-
         }
 
     writer.close();
@@ -98,7 +99,6 @@ try{
     System.out.println("File was not found");
     }
 }
-
 
     public List<Movie> readMovieData(){
         File file = new File(".idea/Doc/MovieList");
@@ -118,5 +118,28 @@ try{
             System.out.println(e.getMessage());
         }
         return  movies;
+    }
+
+
+    public List<Serie> readSerieData(){
+        File file = new File(".idea/Doc/SeriesList");
+        List<Serie> series = new LinkedList<>();
+        //Scanner er sat ind i paranteser så behøver vi ikke at lukke den.
+        try(Scanner scan = new Scanner(file)){
+
+            while(scan.hasNext()){
+                String serieLine = scan.nextLine(); //Scanner næste linje i serieFilen
+                String[] splitted = serieLine.split(";"); //Her splitter den på hele linjen pr semikolon
+                String[] genres = splitted[2].split(","); // det trejdesplit er genrene, der splitter vi igen for at få genrens egen liste
+                String[] seasonsAndEpisodes = splitted[4].split(",");
+                for(int i = 0; i < genres.length; i++){ // For hver genre i den liste, der trimmer vi den så der ikke er mellemrum.
+                    genres[i] = genres[i].trim();
+                }
+                series.add(new Serie(splitted[0].trim(),splitted[1].trim(), genres, Double.parseDouble(splitted[3].trim()), seasonsAndEpisodes)); //Intenger.parseint --> Tager den årstallet som er en String og laver den om til et tal.
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return series;
     }
 }
