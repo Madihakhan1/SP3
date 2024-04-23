@@ -61,12 +61,12 @@ public void saveUserData (List<User> users){
     }
 
 
-    public void saveWatchedMovie (List<Movie> watched){
+    public void saveWatchedMedia (List<Media> watched){
 
     try {
         FileWriter writer = new FileWriter(".idea/Doc/Watched");
 
-        for (Movie m: watched) {
+        for (Media m: watched) {
             String textToSave = (m.getTitle() + m.getPublicationYear() + m.getGenre() + m.getRating() + "\n");
             writer.write(textToSave);
         }
