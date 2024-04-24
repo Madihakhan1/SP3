@@ -12,79 +12,41 @@ public class Streaming {
     private FileIO io = new FileIO();
 
     StartMenu startMenu = new StartMenu();
-    public static User currentUser;
+    private User currentUser = null;
 
-
-public boolean loginOrRegister() {
-        ui.displayMessage("Welcome to ChillFlex, do you want to create a user or login?");
-        String options = "";
-        boolean running = true;
-
-        options = ui.getInput("Choose an option: \n Option 1: create a user \n option 2: login \n option 3: Exit");
-
-        while (running) {
-            switch (options) {
-                case "1":
-                    startMenu.createUser();
-                    ui.displayMessage("\n Please login again");
-                    startMenu.login();
-                    displayMainMenu();
-                    break;
-
-                case "2":
-                    currentUser = startMenu.login();
-                    if (currentUser != null) {
-                        running = false;
-                        return true;
-                    } else {
-                        return false;
-                    }
-
-                case "3":
-                    running = false;
-                    endStreaming();
-                    break;
-            }
-        }
-        return false;
-}
 
 public void displayMainMenu() {
-        String options = ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: see watched list");
+        String options = ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: see watched list \n option 7: logout");
 
         switch (options) {
             case "1":
                 ui.displayMovieList(allMovies);
                 ui.displayMessage("\nChoose a movie ");
-                //play(chosenMovie);
-                endStreaming();
                 break;
 
             case "2":
                 ui.displaySerieList(allSeries);
                 ui.displayMessage("\n choose a serie ");
-                //play(chosenMovie);
-                endStreaming();
                 break;
 
             case "3":
                 searchForMovieByTitle();
-                endStreaming();
                 break;
 
             case "4":
                 searchForMovieByGenre();
-                endStreaming();
                 break;
 
             case "5":
                 displaySavedList();
-                endStreaming();
                 break;
 
             case "6":
                 displayWatchedList();
-                endStreaming();
+                break;
+
+            case "7":
+                currentUser = null;
                 break;
         }
 }
@@ -110,7 +72,7 @@ public void searchForMovieByGenre() {
             switch (choice) {
                 case "1":
                     play(chosenMovie); // Pass the chosen movie to the play() method
-                    currentUser.userWatched(chosenMovie.getTitle());
+                    currentUser.watched(chosenMovie.getTitle());
                     io.saveWatchedAndSaved(currentUser);
                     break;
 
@@ -145,7 +107,7 @@ public void searchForMovieByTitle() {
 
             case "1":
                 play(chosenMovie);
-                currentUser.userWatched(chosenMovie.getTitle());
+                currentUser.watched(chosenMovie.getTitle());
                 io.saveWatchedAndSaved(currentUser);
                 break;
 
@@ -167,7 +129,7 @@ public void play(Movie chosenMovie) {
 }
 
 public void displayWatchedList() {
-        List<String> watchedList = Streaming.currentUser.getWatched();
+        List<String> watchedList = currentUser.getWatched();
             ui.displayMessage("List of watched media:");
             for (String media : watchedList) {
                 ui.displayMessage(media.toString());
@@ -176,7 +138,7 @@ public void displayWatchedList() {
         }
 
 public void displaySavedList() {
-        List<String> savedList = Streaming.currentUser.getSaved();
+        List<String> savedList = currentUser.getSaved();
         ui.displayMessage("Your saved list ");
         for (String media : savedList) {
             ui.displayMessage(media.toString());
@@ -189,28 +151,32 @@ public void setup() {
 }
 
 public void startStreaming() {
-        setup();
-        boolean isLoggedIn = loginOrRegister();
-        if (isLoggedIn) {
+    setup();
+    ui.displayMessage("Welcome to ChillFlex, do you want to create a user or login?");
+    String options = "";
+    boolean running = true;
+
+    while (running) {
+        if (currentUser != null) {
             displayMainMenu();
-        }
-    }
-
-    public void endStreaming() {
-        String streamLoop = ui.getInput("To see the start menu again, press 1. To exit, press 2: ");
-        if (streamLoop.equalsIgnoreCase("1")) {
-
-            switch (streamLoop){
+        } else {
+            options = ui.getInput("Choose an option: \n Option 1: create a user \n option 2: login \n option 3: Exit");
+            switch (options) {
                 case "1":
-                    startStreaming();
+                    startMenu.createUser();
                     break;
 
                 case "2":
-                    endStreaming();
+                    currentUser = startMenu.login();
+                    break;
+                case "3":
+                    running = false;
                     break;
             }
         }
     }
+}
+
 }
 
 

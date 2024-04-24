@@ -9,7 +9,7 @@ public class Main {
         Streaming streaming = new Streaming();
         streaming.startStreaming();
 
-        /*FileIO fileIO = new FileIO();
+        /*FileIO fileIO = new FileIO();2
         List<Movie>media = new ArrayList<>();
         String[] genre = {"crime", "Drama"};
         media.add(new Movie("hej",1999,genre,10));

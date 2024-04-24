@@ -31,16 +31,14 @@ public class User {
         return password;
     }
 
-    public void userWatched(String m) {
-        getWatched().add(m);
-    }
-
-    public void userSaved(String m) {
+     public void userSaved(String m) {
         getSaved().add(m);
     }
 
     public void watched(String media) {
-        watched.add(media);
+        if (!watched.contains(media)) {
+            watched.add(media);
+        }
     }
 
     public List<String> getWatched() {

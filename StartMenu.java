@@ -4,7 +4,6 @@ public class StartMenu {
 
     private String userName;
     private String userPassword;
-    private User currentUser;
     protected List<User> registeredUsers = new LinkedList<>();
 
     private TextUI ui = new TextUI();
@@ -36,22 +35,21 @@ public void createUser(){
 }
 
 
-public User login(){
-    Scanner userinput = new Scanner(System.in);
-    ui.displayMessage("type your username");
-    userName = userinput.nextLine();
-    ui.displayMessage("type your password");
-    userPassword = userinput.nextLine();
+    public User login(){
+        Scanner userinput = new Scanner(System.in);
+        ui.displayMessage("type your username");
+        userName = userinput.nextLine();
+        ui.displayMessage("type your password");
+        userPassword = userinput.nextLine();
 
 
-    for(User u : registeredUsers){
-        if(u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)){
-            currentUser = u;
-            System.out.println("current user: "+currentUser.getUserName());
-            return currentUser;
+        for(User u : registeredUsers){
+            if(u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)){
+                System.out.println("current user: "+u.getUserName());
+                return u;
 
+            }
         }
-    }
-    return null;
+        return null;
     }
 }
