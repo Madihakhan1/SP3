@@ -42,9 +42,7 @@ public boolean loginOrRegister() {
 
                 case "3":
                     running = false;
-                    ui.displayMessage("\nPlease login again");
-                    startMenu.login();
-                    displayMainMenu();
+                    endStreaming();
                     break;
             }
         }
@@ -57,26 +55,36 @@ public void displayMainMenu() {
         switch (options) {
             case "1":
                 ui.displayMovieList(allMovies);
+                ui.displayMessage("\nChoose a movie ");
+                //play(chosenMovie);
+                endStreaming();
                 break;
 
             case "2":
                 ui.displaySerieList(allSeries);
+                ui.displayMessage("\n choose a serie ");
+                //play(chosenMovie);
+                endStreaming();
                 break;
 
             case "3":
                 searchForMovieByTitle();
+                endStreaming();
                 break;
 
             case "4":
                 searchForMovieByGenre();
+                endStreaming();
                 break;
 
             case "5":
                 displaySavedList();
+                endStreaming();
                 break;
 
             case "6":
                 displayWatchedList();
+                endStreaming();
                 break;
         }
 }
@@ -102,6 +110,7 @@ public void searchForMovieByGenre() {
             switch (choice) {
                 case "1":
                     play(chosenMovie); // Pass the chosen movie to the play() method
+                    currentUser.userWatched(chosenMovie.getTitle());
                     io.saveWatchedAndSaved(currentUser);
                     break;
 
@@ -157,18 +166,15 @@ public void play(Movie chosenMovie) {
         }
 }
 
+
 public void displayWatchedList() {
         List<String> watchedList = Streaming.currentUser.getWatched();
-        if (watchedList.isEmpty()) {
-            ui.displayMessage("Your watched list is empty.");
-        } else {
             ui.displayMessage("List of watched media:");
             for (String media : watchedList) {
                 ui.displayMessage(media.toString());
             }
             //io.saveWatchedMedia(watchedList);
         }
-}
 
 public void displaySavedList() {
         List<String> savedList = Streaming.currentUser.getSaved();
@@ -190,6 +196,24 @@ public void startStreaming() {
             displayMainMenu();
         }
     }
+
+    public void endStreaming() {
+        String streamLoop = ui.getInput("To see the start menu again, press 1. To exit, press 2: ");
+        if (streamLoop.equalsIgnoreCase("1")) {
+
+            switch (streamLoop){
+                case "1":
+                    startStreaming();
+                    break;
+
+                case "2":
+                    endStreaming();
+                    break;
+            }
+
+        }
+
+        }
 }
 
 
