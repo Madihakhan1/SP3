@@ -2,138 +2,107 @@
 'https://plantuml.com/object-diagram
 
 class Main{
-
 + static void main(string [] args)
-
-
+Streaming streaming = new Streaming()
+streaming.startStreaming()
 }
 
 class Streaming{
-
 - List<Movie> allMovies
-- ArrayList<String>listOfOptions
+- List<Serie> alleSeries
 - TextUI ui
 - FileIO io
 StartMenu startmenu = new StartMenu();
++ static User currentUser
 + boolean loginOrRegister ()
 + void displayMainMenu ()
-+ void displaySavedList ()
 + void searchForMovieByGenre ()
++ void searchForMovieByTitle ()
++ void play(Movie chosenMovie)
 + void displayWatchedList ()
-+ void logOut ()
++ void displaySavedList ()
 + void setup()
-+ void displayMovieList(List<Movie>in)
-
-
-
++ void startStreaming()
 }
 
 class User{
-
 - String userName
 - String userPassword
-- List<movie>watched
-- List<movie>saved
+- List<Media>watched
+- List<Media>saved
 
 +getUserName()
 +getUserPassword()
-+ void userWatched (Movie)
-+ void userSaved (Movie)
-+List<movie>watched()
-+List<movie>saved()
++ void userWatched (Media m)
++ void userSaved (Media m)
++ List<Media> getWatched()
++ void watched(Media media)
++ List<Media> getSaved()
++ void addToSaveList(Media movie)
 + String toString()
 
 }
 
 abstract Media{
-- String title
-- int publicationYear
-- String[] genre
-- double rating
+# String title
+# String[] genre
+# double rating
 
-Media(String title, int year, String[] genre, double rating)
-void String getTitle()
-void int getPublicationYear()
-void String[] getGenre()
-void double getRating()
-
-
-
-
+Media(String title, String[] genre, double rating)
++ String getTitle()
++ String[] getGenre()
++ double getRating()
 }
 
 class StartMenu{
-
-- String userName;
-- String userPassword;
-- User currenUser;
-# List<User>users = new linkedList<>();
-- TextUI ui = new TextUI();
-- FileIO io = new FileIO();
-+ createUser()
-+ boolean login()
-
+- String userName
+- String userPassword
+- User currenUser
+# List<User> registeredUsers = new linkedList<>()
+- TextUI ui = new TextUI()
+- FileIO io = new FileIO()
+StartMenu()
++ void createUser()
++ User login()
 }
 
-
-
-
 class FileIO{
-
-+ArrayList<User> readUserData (String path)
++ ArrayList<User> readUserData (String path)
 + void saveUserData (List<User> users)
 + List<User>loadAllUserData()
-+ void saveWatchedMovie (List<Movie> watched)
-+ void saveSavedMovie(List<Movie> saved)
++ void saveWatchedMedia (List<Media> watched)
++ void saveSavedMedia(List<Media> saved)
 + List<Movie> readMovieData()
++ List<Serie> readSerieData()
 }
 
 class TextUI{
-
 - Scanner scanner
 + String getInput(String msg)
 + void displayMessage(String msg)
-
-
++ int chooseMovie(List<Movie>)
++ void displayMovieList(List<Movie> in)
++ void displaySerieList(List<Serie> in)
 }
 
-
-
 class Movie {
-- String title
-- int year
-- String[] genre
-- double rating
+- int publicationYear
 
-+ Movie(String title, int year, String[] genre, double rating)
++ Movie(String title, int publicationYear, String[] genre, double rating)
+super(title, genre, rating)
 
-+ String getTitle()
 + int getPublicationYear()
-+ String[] getGenre()
-+ double getRating()
-
 + String toString()
-
 }
 
 class Serie{
-- String title
-- int yearsRunning
-- String[] genre
-- double rating
-- double season
-- double episode
+- String yearsRunning
+- String[] seasonsAndEpisodes
 
-+ Serie(String title, int yearsRunning, String[] genre, double rating, double season, double episode)
-
-+ String getTitle()
-+ int getYearsRunning()
-+ String[] getGenre()
-+ double getRating()
-+ double getSeasons()
-+ double getEpisodes()
++ Serie(String title, String yearsRunning, String[] genre, double rating, String[] seasonsAndEpisodes)
++ String getYearsRunning()
++ String[] getSeasonsAndEpisodes()
 + String toString()
-
 }
 
 Main o-- Streaming

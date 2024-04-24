@@ -59,6 +59,7 @@ public class Streaming {
             case "1":
                 ui.displayMovieList(allMovies);
                 break;
+
             case "2":
                 ui.displaySerieList(allSeries);
                 break;
@@ -102,7 +103,7 @@ public class Streaming {
             switch (choice) {
                 case "1":
                     play(chosenMovie); // Pass the chosen movie to the play() method
-                    //io.saveWatchedMedia(currentUser.getWatched());
+                    io.saveWatchedMedia(currentUser.getWatched());
                     break;
 
                 case "2":
@@ -128,30 +129,24 @@ public class Streaming {
             }
         }
 
-       ui.displayMovieList(moviesByTitle);
-       int chosenIndexMovie = ui.chooseMovie(moviesByTitle, "Please choose a movie. ");
-       if (chosenIndexMovie >= 0 && chosenIndexMovie < moviesByTitle.size()) {
-            Movie chosenMovie = moviesByTitle.get(chosenIndexMovie);
-            ui.displayMessage("You have chosen " + chosenMovie.getTitle());
-            ui.displayMessage("Do you want to play the movie or add it to your saved list? ");
-            String choice = ui.getInput("1. Play, 2. Save to list");
-            switch (choice) {
-                case "1":
-                    play(chosenMovie); // Pass the chosen movie to the play() method
-                    //io.saveWatchedMedia(currentUser.getWatched());
-                    break;
+        Movie chosenMovie = moviesByTitle.get(0);
+        ui.displayMessage("You have chosen " + ui.chooseMovie(moviesByTitle, " do you want to play the movie or add it to your saved list?"));
+        String choice = ui.getInput("option 1. Play, or option 2. Save to list");
+        switch (choice) {
 
-                case "2":
-                    //save to savedlist
-                    currentUser.addToSaveList(chosenMovie);
-                    io.savedMedia(currentUser.getSaved());
-                    break;
-            }
-            //play(chosenMovie); // Pass the chosen movie to the play() method
-        } else {
-            ui.displayMessage("Invalid selection.");
+        case "1":
+        play(chosenMovie);
+        io.saveWatchedMedia(currentUser.getWatched());
+        break;
+
+        case "2":
+            currentUser.addToSaveList(chosenMovie);
+            io.savedMedia(currentUser.getSaved());
+            break;
+
         }
     }
+
 
     public void play(Movie chosenMovie) {
         if (chosenMovie != null) {
