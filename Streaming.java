@@ -166,7 +166,6 @@ public void play(Movie chosenMovie) {
         }
 }
 
-
 public void displayWatchedList() {
         List<String> watchedList = Streaming.currentUser.getWatched();
             ui.displayMessage("List of watched media:");
@@ -210,10 +209,8 @@ public void startStreaming() {
                     endStreaming();
                     break;
             }
-
         }
-
-        }
+    }
 }
 
 
