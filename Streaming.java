@@ -22,6 +22,7 @@ public void displayMainMenu() {
             case "1":
                 ui.displayMovieList(allMovies);
                 ui.displayMessage("\nChoose a movie ");
+                searchForMovieByTitle();
                 break;
 
             case "2":
