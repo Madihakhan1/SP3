@@ -1,4 +1,4 @@
-public class Serie extends Medie {
+public class Serie extends Media {
 
     private String yearsRunning;
     private String[] seasonsAndEpisodes;

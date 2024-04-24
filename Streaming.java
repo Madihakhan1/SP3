@@ -104,7 +104,7 @@ public class Streaming {
             switch (choice) {
                 case "1":
                     play(chosenMovie); // Pass the chosen movie to the play() method
-                    io.saveWatchedMedia(currentUser.getWatched());
+                    io.saveWatchedMedia(currentUser);
                     break;
 
                 case "2":
@@ -138,12 +138,13 @@ public class Streaming {
 
         case "1":
         play(chosenMovie);
-        io.saveWatchedMedia(currentUser.getWatched());
+        currentUser.userWatched(chosenMovie.getTitle());
+        io.saveWatchedMedia(currentUser);
         break;
 
         case "2":
             ui.displayMessage("you have saved " + chosenMovie);
-            currentUser.addToSaveList(chosenMovie);
+            currentUser.addToSaveList(chosenMovie.getTitle());
             io.savedMedia(currentUser.getSaved());
             break;
 
@@ -154,7 +155,7 @@ public class Streaming {
     public void play(Movie chosenMovie) {
         if (chosenMovie != null) {
             ui.displayMessage("Now playing: " + chosenMovie.getTitle());
-            currentUser.watched(chosenMovie);
+            currentUser.watched(chosenMovie.getTitle());
         } else {
             ui.displayMessage("Invalid selection. Please try again.");
         }
@@ -169,7 +170,7 @@ public class Streaming {
             for (String media : watchedList) {
                 ui.displayMessage(media.toString());
             }
-            io.saveWatchedMedia(watchedList);
+            //io.saveWatchedMedia(watchedList);
         }
     }
 

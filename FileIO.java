@@ -61,8 +61,8 @@ public void saveUserData (List<User> users){
         return loadedUsers;
     }
 
-    public void saveWatchedMedia (List<String> watched, User user){
-
+    public void saveWatchedMedia (User user){
+        List<String> watched = user.getWatched();
     try {
         FileWriter writer = new FileWriter(".idea/Doc/Watched");
         String textToSave = user.getUserName() + ":";
@@ -100,12 +100,12 @@ public List<String> readWatchMedia(User user){
     return  medias;
 }
 
-public void savedMedia(List<Media> saved){
+public void savedMedia(List<String> saved){
 
 try{
     FileWriter writer = new FileWriter(".idea/Doc/saved");
 
-    for(Media m: saved) {
+    for(String m: saved) {
         String genres = "";
         String[] genre = m.getGenre();
         for(int i = 0; i < genre.length; i++) {

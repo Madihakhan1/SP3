@@ -1,4 +1,4 @@
-public class Movie extends String {
+public class Movie extends Media {
 
     private int publicationYear;
 
