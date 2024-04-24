@@ -15,11 +15,10 @@ public class Streaming {
     public static User currentUser;
 
 
-    public boolean loginOrRegister() {
+public boolean loginOrRegister() {
         ui.displayMessage("Welcome to ChillFlex, do you want to create a user or login?");
         String options = "";
         boolean running = true;
-//while (choosing){
 
         options = ui.getInput("Choose an option: \n Option 1: create a user \n option 2: login \n option 3: Exit");
 
@@ -31,6 +30,7 @@ public class Streaming {
                     startMenu.login();
                     displayMainMenu();
                     break;
+
                 case "2":
                     currentUser = startMenu.login();
                     if (currentUser != null) {
@@ -39,7 +39,6 @@ public class Streaming {
                     } else {
                         return false;
                     }
-
 
                 case "3":
                     running = false;
@@ -50,9 +49,9 @@ public class Streaming {
             }
         }
         return false;
-    }
+}
 
-    public void displayMainMenu() {
+public void displayMainMenu() {
         String options = ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: see watched list");
 
         switch (options) {
@@ -79,11 +78,10 @@ public class Streaming {
             case "6":
                 displayWatchedList();
                 break;
-
         }
-    }
+}
 
-    public void searchForMovieByGenre() {
+public void searchForMovieByGenre() {
         System.out.println(" ");
         String input = ui.getInput("Write the genre you are looking for");
         List<Movie> moviesByGenre = new LinkedList<>();
@@ -117,9 +115,9 @@ public class Streaming {
         } else {
             ui.displayMessage("Invalid selection.");
         }
-    }
+}
 
-    public void searchForMovieByTitle() {
+public void searchForMovieByTitle() {
         System.out.println(" ");
         String input = ui.getInput("Write the title you are looking for");
         List<Movie> moviesByTitle = new LinkedList<>();
@@ -147,21 +145,19 @@ public class Streaming {
                 currentUser.addToSaveList(chosenMovie.getTitle());
                 io.saveWatchedAndSaved(currentUser);
                 break;
-
         }
-    }
+}
 
-
-    public void play(Movie chosenMovie) {
+public void play(Movie chosenMovie) {
         if (chosenMovie != null) {
-            ui.displayMessage("Now playing: " + chosenMovie.getTitle());
+            ui.displayMessage("Now playing: " + chosenMovie);
             currentUser.watched(chosenMovie.getTitle());
         } else {
             ui.displayMessage("Invalid selection. Please try again.");
         }
-    }
+}
 
-    public void displayWatchedList() {
+public void displayWatchedList() {
         List<String> watchedList = Streaming.currentUser.getWatched();
         if (watchedList.isEmpty()) {
             ui.displayMessage("Your watched list is empty.");
@@ -172,29 +168,29 @@ public class Streaming {
             }
             //io.saveWatchedMedia(watchedList);
         }
-    }
+}
 
-    public void displaySavedList() {
+public void displaySavedList() {
         List<String> savedList = Streaming.currentUser.getSaved();
         ui.displayMessage("Your saved list ");
         for (String media : savedList) {
             ui.displayMessage(media.toString());
         }
-    }
+}
 
-        public void setup() {
-            allMovies = io.readMovieData();
-            allSeries = io.readSerieData();
-        }
+public void setup() {
+        allMovies = io.readMovieData();
+        allSeries = io.readSerieData();
+}
 
-        public void startStreaming() {
-            setup();
-            boolean isLoggedIn = loginOrRegister();
-            if (isLoggedIn) {
-                displayMainMenu();
-            }
+public void startStreaming() {
+        setup();
+        boolean isLoggedIn = loginOrRegister();
+        if (isLoggedIn) {
+            displayMainMenu();
         }
     }
+}
 
 
 

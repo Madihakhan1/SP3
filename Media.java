@@ -5,26 +5,22 @@ public abstract class Media {
     protected double rating;
 
 
-    public Media(String title, String[] genre, double rating) {
+public Media(String title, String[] genre, double rating) {
 
         this.title = title;
         this.genre = genre;
         this.rating = rating;
-    }
+}
 
-    public String getTitle() {
+public String getTitle() {
         return title;
-    }
+}
 
-
-
-    public String[] getGenre() {
+public String[] getGenre() {
         return genre;
-    }
+}
 
-    public double getRating() {
+public double getRating() {
         return rating;
     }
-
-
 }

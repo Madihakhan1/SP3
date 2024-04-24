@@ -4,23 +4,22 @@ public class Serie extends Media {
     private String[] seasonsAndEpisodes;
 
 
-    public Serie(String title, String yearsRunning, String[] genre, double rating, String[] seasonsAndEpisodes) {
+public Serie(String title, String yearsRunning, String[] genre, double rating, String[] seasonsAndEpisodes) {
         super(title, genre, rating);
         this.yearsRunning = yearsRunning;
         this.seasonsAndEpisodes = seasonsAndEpisodes;
-    }
+}
 
-    public String getYearsRunning() {
+public String getYearsRunning() {
         return yearsRunning;
-    }
+}
 
-    public String[] getSeasonsAndEpisodes(){
+public String[] getSeasonsAndEpisodes(){
         return seasonsAndEpisodes;
-    }
+}
 
-
-    @Override
-    public String toString() {
+@Override
+public String toString() {
         String genres = "";
         for(String s : this.genre){
             genres += ", ";
@@ -31,5 +30,4 @@ public class Serie extends Media {
 
         return out.toString();
     }
-
 }

@@ -6,7 +6,6 @@ import java.lang.String;
 
 public class FileIO {
 
-
     public ArrayList<User> readUserData (String path){
         return readUserData(".idea/Doc/Users");
     }
@@ -14,8 +13,7 @@ public class FileIO {
 
 public void saveUserData (List<User> users){
         File file = new File(".idea/Doc/Users");
-
-    try {
+        try {
         Scanner scan = new Scanner(file);
         scan.nextLine();
         FileWriter writer = new FileWriter(".idea/Doc/Users");
