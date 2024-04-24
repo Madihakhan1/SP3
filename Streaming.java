@@ -108,7 +108,7 @@ public class Streaming {
                     break;
 
                 case "2":
-                    //save to savedlist
+                    ui.displayMessage("you have saved " + chosenMovie);
                     currentUser.addToSaveList(chosenMovie);
                     io.savedMedia(currentUser.getSaved());
                     break;
@@ -130,8 +130,6 @@ public class Streaming {
             }
         }
 
-
-
         Movie chosenMovie = moviesByTitle.get(0);
         ui.displayMessage("You have chosen: " + chosenMovie.getTitle());
         String choice = ui.getInput("Do you want to play the movie or add it to your saved list? \n(Choose 1: play' or 2: save)");
@@ -144,6 +142,7 @@ public class Streaming {
         break;
 
         case "2":
+            ui.displayMessage("you have saved " + chosenMovie);
             currentUser.addToSaveList(chosenMovie);
             io.savedMedia(currentUser.getSaved());
             break;
@@ -162,12 +161,12 @@ public class Streaming {
     }
 
     public void displayWatchedList() {
-        List<Media> watchedList = Streaming.currentUser.getWatched();
+        List<String> watchedList = Streaming.currentUser.getWatched();
         if (watchedList.isEmpty()) {
             ui.displayMessage("Your watched list is empty.");
         } else {
             ui.displayMessage("List of watched media:");
-            for (Media media : watchedList) {
+            for (String media : watchedList) {
                 ui.displayMessage(media.toString());
             }
             io.saveWatchedMedia(watchedList);
@@ -179,12 +178,13 @@ public class Streaming {
         for (Media media : watchedList) {
             ui.displayMessage(media.toString());
         }
-    }
+        io.saveWatchedMedia(watchedList);
+    }*/
 
     public void displaySavedList(){
-        List<Media> savedList  = Streaming.currentUser.getSaved();
+        List<String> savedList  = Streaming.currentUser.getSaved();
         ui.displayMessage("Your saved list ");
-        for (Media media : savedList) {
+        for (String media : savedList) {
             ui.displayMessage(media.toString());
         }
     }

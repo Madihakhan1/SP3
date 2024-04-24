@@ -1,7 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
-
-public class Movie extends Media {
+public class Movie extends String {
 
     private int publicationYear;
 

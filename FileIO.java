@@ -58,32 +58,49 @@ public void saveUserData (List<User> users){
         return loadedUsers;
     }
 
-    public void saveWatchedMedia (List<Media> watched){
+    public void saveWatchedMedia (List<String> watched, User user){
 
     try {
         FileWriter writer = new FileWriter(".idea/Doc/Watched");
-
-        for (Media m: watched) {
-            String genres = "";
-            String[] genre = m.getGenre();
-            for(int i = 0; i < genre.length; i++) {
-                genres += genre[i] + ",";
-            }
-            String textToSave = (m.getTitle() + "; " + "; " + genres +  "; " + m.getRating() + "\n");
-            writer.write(textToSave);
+        String textToSave = user.getUserName() + ":";
+        for (String m: watched) {
+            textToSave += m.getTitle() + ",";
         }
+        writer.write(textToSave + "\n");
         writer.close();
     }catch (IOException e){
         System.out.println("File was not found");
     }
 }
 
-public void savedMedia(List<Media> saved){
+public List<String> readWatchMedia(){
+    File file = new File(".idea/Doc/MovieList");
+    List<String> medias = new LinkedList<>();
+    //Scanner er sat ind i paranteser så behøver vi ikke at lukke den.
+    try(Scanner scan = new Scanner(file)){
+        while(scan.hasNext()){
+            String dataLine = scan.nextLine(); //Scanner næste linje i movieFilen
+            String[] splitted = dataLine.split(";"); //Her splitter den på hele linjen pr semikolon
+            String userName = splitted[0].trim();
+            String[] movies = splitted[1].split(","); // det trejdesplit er genrene, der splitter vi igen for at få genrens egen liste
+            for(int i = 0; i < movies.length; i++){ // For hver genre i den liste, der trimmer vi den så der ikke er mellemrum.
+                movies[i] = movies[i].trim();
+                medias.add(movies[i]);
+            }
+             //Intenger.parseint --> Tager den årstallet som er en String og laver den om til et tal.
+        }
+    }catch (Exception e){
+        System.out.println(e.getMessage());
+    }
+    return  medias;
+}
+
+public void savedMedia(List<String> saved){
 
 try{
     FileWriter writer = new FileWriter(".idea/Doc/saved");
 
-    for(Media m: saved) {
+    for(String m: saved) {
         String genres = "";
         String[] genre = m.getGenre();
         for(int i = 0; i < genre.length; i++) {

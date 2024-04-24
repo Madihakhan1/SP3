@@ -8,8 +8,8 @@ public class User {
 
     private String userName;
     private String password;
-    private List<Media> watched;
-    private List<Media> saved;
+    private List<String> watched;
+    private List<String> saved;
 
 
     public User(String userName, String password) {
@@ -28,29 +28,29 @@ public class User {
         return password;
     }
 
-    public void userWatched(Media m) {
+    public void userWatched(String m) {
         getWatched().add(m);
     }
 
-    public void userSaved(Media m) {
+    public void userSaved(String m) {
         getSaved().add(m);
     }
 
-    public void watched(Media media) {
+    public void watched(String media) {
         watched.add(media);
     }
 
-    public List<Media> getWatched() {
+    public List<String> getWatched() {
 
         return watched;
     }
 
 
-    public List<Media> getSaved() {
+    public List<String> getSaved() {
         return saved;
     }
 
-    public  void addToSaveList(Media movie){
+    public  void addToSaveList(String movie){
         saved.add(movie);
     }
 
