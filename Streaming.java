@@ -66,6 +66,7 @@ public class Streaming {
 
             case  "3":
                 searchForMovieByTitle();
+                break;
 
             case "4":
                 searchForMovieByGenre();
@@ -129,9 +130,12 @@ public class Streaming {
             }
         }
 
+
+
         Movie chosenMovie = moviesByTitle.get(0);
-        ui.displayMessage("You have chosen " + ui.chooseMovie(moviesByTitle, " do you want to play the movie or add it to your saved list?"));
-        String choice = ui.getInput("option 1. Play, or option 2. Save to list");
+        ui.displayMessage("You have chosen: " + chosenMovie.getTitle());
+        String choice = ui.getInput("Do you want to play the movie or add it to your saved list? \n(Choose 1: play' or 2: save)");
+
         switch (choice) {
 
         case "1":
@@ -166,7 +170,6 @@ public class Streaming {
             for (Media media : watchedList) {
                 ui.displayMessage(media.toString());
             }
-            // Save the watched list if necessary
             io.saveWatchedMedia(watchedList);
         }
     }

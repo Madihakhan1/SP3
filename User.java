@@ -36,12 +36,15 @@ public class User {
         getSaved().add(m);
     }
 
-    public List<Media> getWatched() {
-        return watched;
-    }
     public void watched(Media media) {
         watched.add(media);
     }
+
+    public List<Media> getWatched() {
+
+        return watched;
+    }
+
 
     public List<Media> getSaved() {
         return saved;
