@@ -15,7 +15,7 @@ public class Streaming {
     public static User currentUser;
 
 
-    public boolean loginOrRegister(){
+    public boolean loginOrRegister() {
         ui.displayMessage("Welcome to ChillFlex, do you want to create a user or login?");
         String options = "";
         boolean running = true;
@@ -23,7 +23,7 @@ public class Streaming {
 
         options = ui.getInput("Choose an option: \n Option 1: create a user \n option 2: login \n option 3: Exit");
 
-        while(running) {
+        while (running) {
             switch (options) {
                 case "1":
                     startMenu.createUser();
@@ -33,10 +33,10 @@ public class Streaming {
                     break;
                 case "2":
                     currentUser = startMenu.login();
-                    if(currentUser!=null){
+                    if (currentUser != null) {
                         running = false;
                         return true;
-                    }else {
+                    } else {
                         return false;
                     }
 
@@ -52,8 +52,8 @@ public class Streaming {
         return false;
     }
 
-    public void displayMainMenu (){
-        String options =   ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: see watched list");
+    public void displayMainMenu() {
+        String options = ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: see watched list");
 
         switch (options) {
             case "1":
@@ -64,7 +64,7 @@ public class Streaming {
                 ui.displaySerieList(allSeries);
                 break;
 
-            case  "3":
+            case "3":
                 searchForMovieByTitle();
                 break;
 
@@ -72,24 +72,24 @@ public class Streaming {
                 searchForMovieByGenre();
                 break;
 
-            case"5":
+            case "5":
                 displaySavedList();
                 break;
 
-            case"6":
+            case "6":
                 displayWatchedList();
                 break;
 
         }
     }
 
-    public void searchForMovieByGenre(){
+    public void searchForMovieByGenre() {
         System.out.println(" ");
         String input = ui.getInput("Write the genre you are looking for");
         List<Movie> moviesByGenre = new LinkedList<>();
-        for(Movie m: allMovies){
-            for(String s : m.getGenre()){
-                if(s.equalsIgnoreCase(input)){
+        for (Movie m : allMovies) {
+            for (String s : m.getGenre()) {
+                if (s.equalsIgnoreCase(input)) {
                     moviesByGenre.add(m);
                 }
             }
@@ -109,8 +109,8 @@ public class Streaming {
 
                 case "2":
                     ui.displayMessage("you have saved " + chosenMovie);
-                    currentUser.addToSaveList(chosenMovie);
-                    io.saveWatchedAndSaved(currentUser.getSaved());
+                    currentUser.addToSaveList(chosenMovie.getTitle());
+                    io.saveWatchedAndSaved(currentUser);
                     break;
             }
             //play(chosenMovie); // Pass the chosen movie to the play() method
@@ -119,13 +119,13 @@ public class Streaming {
         }
     }
 
-    public void searchForMovieByTitle(){
+    public void searchForMovieByTitle() {
         System.out.println(" ");
         String input = ui.getInput("Write the title you are looking for");
         List<Movie> moviesByTitle = new LinkedList<>();
-        for(Movie mTitle: allMovies){
+        for (Movie mTitle : allMovies) {
             String s = mTitle.getTitle();
-            if(s.equalsIgnoreCase(input)){
+            if (s.equalsIgnoreCase(input)) {
                 moviesByTitle.add(mTitle);
             }
         }
@@ -136,17 +136,17 @@ public class Streaming {
 
         switch (choice) {
 
-        case "1":
-        play(chosenMovie);
-        currentUser.userWatched(chosenMovie.getTitle());
-        io.saveWatchedAndSaved(currentUser);
-        break;
+            case "1":
+                play(chosenMovie);
+                currentUser.userWatched(chosenMovie.getTitle());
+                io.saveWatchedAndSaved(currentUser);
+                break;
 
-        case "2":
-            ui.displayMessage("you have saved " + chosenMovie);
-            currentUser.addToSaveList(chosenMovie.getTitle());
-            io.saveWatchedAndSaved(currentUser.getSaved());
-            break;
+            case "2":
+                ui.displayMessage("you have saved " + chosenMovie);
+                currentUser.addToSaveList(chosenMovie.getTitle());
+                io.saveWatchedAndSaved(currentUser);
+                break;
 
         }
     }
@@ -182,12 +182,12 @@ public class Streaming {
         }
 
 
-        public void setup () {
+        public void setup() {
             allMovies = io.readMovieData();
             allSeries = io.readSerieData();
         }
 
-        public void startStreaming () {
+        public void startStreaming() {
             setup();
             boolean isLoggedIn = loginOrRegister();
             if (isLoggedIn) {
@@ -195,6 +195,7 @@ public class Streaming {
             }
         }
     }
+}
 
 
 
