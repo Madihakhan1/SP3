@@ -180,7 +180,7 @@ public class Streaming {
         for (String media : savedList) {
             ui.displayMessage(media.toString());
         }
-
+    }
 
         public void setup() {
             allMovies = io.readMovieData();
@@ -195,7 +195,7 @@ public class Streaming {
             }
         }
     }
-}
+
 
 
 
