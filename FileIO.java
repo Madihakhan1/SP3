@@ -61,16 +61,24 @@ public void saveUserData (List<User> users){
         return loadedUsers;
     }
 
-    public void saveWatchedMedia (User user){
+    public void saveWatchedAndSaved(User user){
         List<String> watched = user.getWatched();
+        List<String> saved = user.getSaved();
     try {
-        FileWriter writer = new FileWriter(".idea/Doc/Watched");
-        String textToSave = user.getUserName() + ":";
+        FileWriter fwSaved = new FileWriter(".idea/Doc/saved");
+        FileWriter fwWatched = new FileWriter(".idea/Doc/Watched");
+        String watchedToSave = user.getUserName() + ":";
+        String savedToSave = user.getUserPassword() + ":";
         for (String m: watched) {
-            textToSave += m + ",";
+            watchedToSave += m + ",";
         }
-        writer.write(textToSave + "\n");
-        writer.close();
+        for (String m: saved) {
+            savedToSave += m + ",";
+        }
+        fwWatched.write(watchedToSave + "\n");
+        fwSaved.write(savedToSave + "\n");
+        fwSaved.close();
+        fwWatched.close();
     }catch (IOException e){
         System.out.println("File was not found");
     }
@@ -100,27 +108,6 @@ public List<String> readWatchMedia(User user){
     return  medias;
 }
 
-public void savedMedia(List<String> saved){
-
-try{
-    FileWriter writer = new FileWriter(".idea/Doc/saved");
-
-    for(String m: saved) {
-        String genres = "";
-        String[] genre = m.getGenre();
-        for(int i = 0; i < genre.length; i++) {
-        genres += genre[i] + ",";
-        }
-            // pil genrer ud og kør igennem med for-loop og lav string ud af dem (fx crime, romance, drama)
-            String textToSave = (m.getTitle() + "; " + "; " + genres +  "; " + m.getRating() + "\n");
-            writer.write(textToSave);
-        }
-
-    writer.close();
-}catch (IOException e){
-    System.out.println("File was not found");
-    }
-}
 
     public List<Movie> readMovieData(){
         File file = new File(".idea/Doc/MovieList");

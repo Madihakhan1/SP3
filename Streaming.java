@@ -104,13 +104,13 @@ public class Streaming {
             switch (choice) {
                 case "1":
                     play(chosenMovie); // Pass the chosen movie to the play() method
-                    io.saveWatchedMedia(currentUser);
+                    io.saveWatchedAndSaved(currentUser);
                     break;
 
                 case "2":
                     ui.displayMessage("you have saved " + chosenMovie);
                     currentUser.addToSaveList(chosenMovie);
-                    io.savedMedia(currentUser.getSaved());
+                    io.saveWatchedAndSaved(currentUser.getSaved());
                     break;
             }
             //play(chosenMovie); // Pass the chosen movie to the play() method
@@ -139,13 +139,13 @@ public class Streaming {
         case "1":
         play(chosenMovie);
         currentUser.userWatched(chosenMovie.getTitle());
-        io.saveWatchedMedia(currentUser);
+        io.saveWatchedAndSaved(currentUser);
         break;
 
         case "2":
             ui.displayMessage("you have saved " + chosenMovie);
             currentUser.addToSaveList(chosenMovie.getTitle());
-            io.savedMedia(currentUser.getSaved());
+            io.saveWatchedAndSaved(currentUser.getSaved());
             break;
 
         }
@@ -174,35 +174,27 @@ public class Streaming {
         }
     }
 
-       /* List<Media> watchedList = Streaming.currentUser.getWatched();
-        ui.displayMessage("Chose a media you've already watched or want to continue watching: ");
-        for (Media media : watchedList) {
-            ui.displayMessage(media.toString());
-        }
-        io.saveWatchedMedia(watchedList);
-    }*/
-
-    public void displaySavedList(){
-        List<String> savedList  = Streaming.currentUser.getSaved();
+    public void displaySavedList() {
+        List<String> savedList = Streaming.currentUser.getSaved();
         ui.displayMessage("Your saved list ");
         for (String media : savedList) {
             ui.displayMessage(media.toString());
         }
-    }
 
-    public void setup(){
-        allMovies = io.readMovieData();
-        allSeries = io.readSerieData();
-    }
 
-    public void startStreaming() {
-        setup();
-        boolean isLoggedIn = loginOrRegister();
-        if (isLoggedIn) {
-            displayMainMenu();
+        public void setup () {
+            allMovies = io.readMovieData();
+            allSeries = io.readSerieData();
+        }
+
+        public void startStreaming () {
+            setup();
+            boolean isLoggedIn = loginOrRegister();
+            if (isLoggedIn) {
+                displayMainMenu();
+            }
         }
     }
-}
 
 
 
