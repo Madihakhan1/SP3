@@ -19,6 +19,9 @@ public class User {
         this.saved = new ArrayList<>();
     }
 
+    public void setWatched(List<String> watched) {
+        this.watched = watched;
+    }
 
     public String getUserName() {
         return userName;
