@@ -158,10 +158,23 @@ public class Streaming {
     }
 
     public void displayWatchedList() {
-        List<Media> watchedList = Streaming.currentUser.getWatched(); // Assuming this returns a list of watched media
-        ui.displayMessage("Chosen media you've already watched or want to continue watching: ");
+        List<Media> watchedList = Streaming.currentUser.getWatched();
+        if (watchedList.isEmpty()) {
+            ui.displayMessage("Your watched list is empty.");
+        } else {
+            ui.displayMessage("List of watched media:");
+            for (Media media : watchedList) {
+                ui.displayMessage(media.toString());
+            }
+            // Save the watched list if necessary
+            io.saveWatchedMedia(watchedList);
+        }
+    }
+
+       /* List<Media> watchedList = Streaming.currentUser.getWatched();
+        ui.displayMessage("Chose a media you've already watched or want to continue watching: ");
         for (Media media : watchedList) {
-            ui.displayMessage(media.toString()); // Assuming media.toString() provides appropriate information
+            ui.displayMessage(media.toString());
         }
     }
 
