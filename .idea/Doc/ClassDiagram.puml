@@ -13,8 +13,7 @@ class Streaming{
 - TextUI ui
 - FileIO io
 StartMenu startmenu = new StartMenu();
-+ static User currentUser
-+ boolean loginOrRegister ()
+- User currentUser
 + void displayMainMenu ()
 + void searchForMovieByGenre ()
 + void searchForMovieByTitle ()
@@ -28,17 +27,18 @@ StartMenu startmenu = new StartMenu();
 class User{
 - String userName
 - String userPassword
-- List<Media>watched
-- List<Media>saved
-
+- List<String>watched
+- List<String>saved
++ User (String userName, String password)
++ void setWatched(List<String> watched)
 +getUserName()
 +getUserPassword()
-+ void userWatched (Media m)
 + void userSaved (Media m)
-+ List<Media> getWatched()
-+ void watched(Media media)
-+ List<Media> getSaved()
-+ void addToSaveList(Media movie)
++ void userSaved(String m)
++ void watched(String media)
++ List<String> getWatched()
++ List<String> getSaved()
++ void addToSaveList(String movie)
 + String toString()
 
 }
@@ -57,11 +57,10 @@ Media(String title, String[] genre, double rating)
 class StartMenu{
 - String userName
 - String userPassword
-- User currenUser
 # List<User> registeredUsers = new linkedList<>()
 - TextUI ui = new TextUI()
 - FileIO io = new FileIO()
-StartMenu()
++ StartMenu()
 + void createUser()
 + User login()
 }
@@ -70,8 +69,8 @@ class FileIO{
 + ArrayList<User> readUserData (String path)
 + void saveUserData (List<User> users)
 + List<User>loadAllUserData()
-+ void saveWatchedMedia (List<Media> watched)
-+ void saveSavedMedia(List<Media> saved)
++ void saveWatchedAndSaved (User user)
++ List<String> readWatchMedia(User user)
 + List<Movie> readMovieData()
 + List<Serie> readSerieData()
 }
@@ -90,7 +89,6 @@ class Movie {
 
 + Movie(String title, int publicationYear, String[] genre, double rating)
 super(title, genre, rating)
-
 + int getPublicationYear()
 + String toString()
 }
@@ -98,10 +96,7 @@ super(title, genre, rating)
 class Serie{
 - String yearsRunning
 - String[] seasonsAndEpisodes
-
 + Serie(String title, String yearsRunning, String[] genre, double rating, String[] seasonsAndEpisodes)
-+ String getYearsRunning()
-+ String[] getSeasonsAndEpisodes()
 + String toString()
 }
 

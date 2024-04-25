@@ -9,7 +9,7 @@ public class StartMenu {
     private TextUI ui = new TextUI();
     private FileIO io = new FileIO();
 
-    StartMenu() {
+   public StartMenu() {
         this.registeredUsers = io.loadAllUserData();
     }
 

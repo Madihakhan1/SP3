@@ -16,7 +16,7 @@ public class Streaming {
 
 
 public void displayMainMenu() {
-        String options = ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: see watched list \n option 7: logout");
+        String options = ui.getInput("Choose an option \n Option 1: see Movielist \n option 2: see Serielist \n option 3: search after title \n option 4: search after genre \n option 5 display saved list \n option 6: display watched list \n option 7: logout");
 
         switch (options) {
             case "1":

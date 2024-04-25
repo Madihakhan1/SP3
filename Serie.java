@@ -10,13 +10,7 @@ public Serie(String title, String yearsRunning, String[] genre, double rating, S
         this.seasonsAndEpisodes = seasonsAndEpisodes;
 }
 
-public String getYearsRunning() {
-        return yearsRunning;
-}
 
-public String[] getSeasonsAndEpisodes(){
-        return seasonsAndEpisodes;
-}
 
 @Override
 public String toString() {
