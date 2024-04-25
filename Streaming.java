@@ -72,7 +72,7 @@ public void searchForMovieByGenre() {
             String choice = ui.getInput("1. Play, 2. Save to list");
             switch (choice) {
                 case "1":
-                    play(chosenMovie); // Pass the chosen movie to the play() method
+                    play(chosenMovie);
                     currentUser.watched(chosenMovie.getTitle());
                     io.saveWatchedAndSaved(currentUser);
                     break;
@@ -83,7 +83,7 @@ public void searchForMovieByGenre() {
                     io.saveWatchedAndSaved(currentUser);
                     break;
             }
-            //play(chosenMovie); // Pass the chosen movie to the play() method
+
         } else {
             ui.displayMessage("Invalid selection.");
         }
