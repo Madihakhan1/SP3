@@ -102,7 +102,7 @@ public void searchForMovieByTitle() {
 
         Movie chosenMovie = moviesByTitle.get(0);
         ui.displayMessage("You have chosen: " + chosenMovie.getTitle());
-        String choice = ui.getInput("Do you want to play the movie or add it to your saved list? \n(Choose 1: play' or 2: save)");
+        String choice = ui.getInput("Do you want to play the movie or add it to your saved list? \n(Choose 1: play or 2: save)");
 
         switch (choice) {
 
